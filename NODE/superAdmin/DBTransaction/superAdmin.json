@@ -1,0 +1,19 @@
+{
+    "_id":"669a0e9ba89ea4c142cb7db4",
+    "first_name": "Super",
+    "last_name": "Admin",
+    "email": "nodemaster@yopmail.com",
+    "password": "Node@123!",
+    "dob":null,
+    "address": null,
+    "phone_number": null,
+    "country_code": null,
+    "resetToken": null,
+    "resetTokenExpiration": null,
+    "profile_pic": null,
+    "plan_id": null,
+    "plan_activate_date": null,
+    "plan_status": false,
+    "plan_exp": null,
+    "__v": 0
+  }

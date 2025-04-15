@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            /* Gradient background */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+            /* Red glowing effect */
+            animation: glow-animation 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-animation {
+            0% {
+                text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+            }
+
+            100% {
+                text-shadow: 0 0 20px #ff6347, 0 0 30px #ff6347, 0 0 40px #ff6347;
+            }
+        }
+
+        /* .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: #ff6347;
+            text-decoration: none;
+        } */
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Semi-transparent background */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .endpoint {
+            display: flex;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            width: 60%;
+            padding: 20px;
+        }
+
+        .content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #ff6347;
+            /* Red color for headings */
+        }
+
+        .content p,
+        .content pre {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .side-boxes {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .box {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+            /* Red glowing shadow */
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            /* Slight zoom on hover */
+        }
+
+        .box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00b894;
+            /* Emerald color for subheadings */
+        }
+
+        .box pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: #00b894;
+            /* Emerald color for button text */
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .copy-button:hover {
+            color: #ff6347;
+            /* Red color on hover */
+        }
+
+        .copy-button:disabled {
+            color: #aaa;
+            /* Grey color when disabled */
+            cursor: not-allowed;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 150px;
+            padding: 10px;
+            margin-right: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .sticky-header {
+            position: sticky;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.979);
+            
+            top: 0;
+            /* background-color: #f4f4f4; */
+            padding: 10px 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back-link {
+            margin-left: 10px;  
+            text-decoration: none; 
+            font-size: 18px;
+            color: #ff6347; 
+        }
+        .header-container {
+            flex-grow: 1;
+            text-align: center;
+        } 
+    </style>
+</head>
+
+<body>
+    <div class="sticky-header">
+        <a href="api-documentation.html" class="back-link">&#9756 Back to Categories</a>
+        <div class="header-container">
+            <h1 class="header glow">API Documentation</h1>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search API..." />
+        </div>
+    </div>
+    <div class="container">
+        <div class="endpoint">
+            <div class="content">
+                <h2>Product List API</h2>
+                <p>This API allows to get List of Products which admin is created. Token Require in this.</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Endpoint:</strong> <code> product/list</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/product/list'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response1', this)">Copy</button>
+                    <pre id="response1"><code>{
+     "status": true,
+     "message": "Product List",
+     "data": {
+        // Product Data
+     }
+}</code>
+                </pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Add Product API</h2>
+                <p>This API allows   Admin to add/create a Product  for the Users.</p>
+                <p><strong>Endpoint:</strong> <code> product/create</code></p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>name</li>
+                    <li>price</li>
+                    <li>color:In Array</li>
+                    <li>size:In Array</li>
+                    <li>description</li>
+                    <li>quantity</li>
+                    <li>isExchangeable</li>
+                    <li>isRefundable</li>
+                    <li>isRepairable</li>
+                    <li>productImages</li>
+                </ul>
+                </p>
+                <p> <strong>Note:</strong> By default type is <strong>user</strong> </p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/product/create' \
+                    --header 'x-access-token: //Token' \
+                    --form 'name=" test_pro"' \
+                    --form 'price=" 500"' \
+                    --form 'color[]=" blue"' \
+                    --form 'size[]=" M"' \
+                    --form 'description=" This is a test Product"' \
+                    --form 'quantity=" 5"' \
+                    --form 'isExchangeable="true"' \
+                    --form 'isRefundable="true"' \
+                    --form 'productImages=@"/home/nodejs/Downloads/sideImage.png"' \
+                    --form 'category="66a8e9817eb334de85fe4b5c"'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    name: // product name
+    price: // product price
+    color[]: // product color in array
+    size[]: // product size in array
+    description: // product description
+    quantity: // product quantity
+    isExchangeable: // Boolean // default is true
+    isRefundable: // Boolean // default is true
+    productImages: // product images in array // Buffer image
+    category: // category object id
+    // other keys to Add
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Product Created Successfully",
+    "data": // product data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+         <div class="endpoint">
+            <div class="content">
+                <h2>Edit Product API</h2>
+                <p>his API allows to edit a specific product. Token Require in this. Product id pass in body
+                    of API </p>
+                <p><strong>Endpoint:</strong> <code> /product/edit</code></p>
+                <p><strong>Method:</strong> PUT</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>name</li>
+                    <li>price</li>
+                    <li>color[]</li>
+                    <li>size[]</li>
+                    <li>quantity</li>
+                    <li>isExchangeable</li>
+                    <li>isRefundable</li>
+                    <li>productImages</li>
+                    <li>description</li>
+                </ul>
+                </p>
+                <p> <strong>Note:</strong> By default type is <strong>user</strong> </p>
+                <p><strong>cURL</strong> :- curl --location --request PUT 'http://localhost:6000/product/edit' \
+--header 'x-access-token: //token \
+--form 'name=" test_pro"' \
+--form 'price=" 500"' \
+--form 'color[]=" blue"' \
+--form 'size[]=" M"' \
+--form 'description=" This is a test Product"' \
+--form 'quantity=" 5"' \
+--form 'isExchangeable="true"' \
+--form 'isRefundable="true"' \
+--form 'productImages=@"/path/to/file"'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    name: // product name
+    price: // product price
+    color[]: // product color in array
+    size[]: // product size in array
+    description: // product description
+    quantity: // product quantity
+    isExchangeable: // Boolean // default is true
+    isRefundable: // Boolean // default is true
+    productImages: // product images in array // Buffer image
+    // other keys to Add
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Product Updated Successfully",
+    "data": // product Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+         <div class="endpoint">
+            <div class="content">
+                <h2>Delete Product API</h2>
+                <p>This API allows Admin to Delete a Product by passing product id in query params.</p>
+                <p><strong>Endpoint:</strong> <code> /product/delete</code></p>
+                <p><strong>Method:</strong> Delete</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location --request DELETE 'http://localhost:3000/product/delete?product_id=6698c70217f8a2dbe05e7115' \
+                --header 'x-access-token: //Token'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Product Deleted Successfully",  
+}</code></pre>
+                </div>
+            </div>
+        </div>

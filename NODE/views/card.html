@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Square Payment Form</title>
+  <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+  <style>
+    #payment-form {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    #sq-card {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Square Payment Form</h2>
+  
+  <!-- Square will inject the card input field into this div -->
+  <form id="payment-form">
+    <div id="sq-card"></div>
+    <button id="sq-creditcard" type="button" onclick="onGetCardNonce(event)">Pay</button>
+  </form>
+
+  <p id="nonce-output" style="text-align: center; margin-top: 20px;"></p>
+
+  <script>
+    // const applicationId = 'your-sandbox-application-id'; // Replace with your Sandbox Application ID
+    let card;
+
+    async function initializeCard() {
+      // Initialize the Square payment form
+      const payments = Square.payments('sandbox-sq0idb-ruStM2nMUjMTZW9NSyw63g', 'sandbox');
+      card = await payments.card();
+
+      // Attach card input field to the #sq-card div
+      await card.attach('#sq-card');
+    }
+
+    async function onGetCardNonce(event) {
+      event.preventDefault();
+
+      try {
+        // Tokenize the card details entered in the Square Payment form
+        const result = await card.tokenize();
+        if (result.status === 'OK') {
+          const nonce = result.token;
+          document.getElementById('nonce-output').textContent = 'Generated Nonce: ' + nonce;
+          console.log('Generated Nonce:', nonce);
+        } else {
+          document.getElementById('nonce-output').textContent = 'Error: ' + result.errors[0].detail;
+        }
+      } catch (error) {
+        console.error(error);
+        document.getElementById('nonce-output').textContent = 'An error occurred.';
+      }
+    }
+
+    // Initialize card when the page loads
+    window.onload = initializeCard;
+  </script>
+</body>
+</html>
