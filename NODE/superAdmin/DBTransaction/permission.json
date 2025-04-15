@@ -1,0 +1,60 @@
+[{
+  "_id" : "669a48dcbbbf899022975888",
+  "module_name": "product",
+  "view":true,
+  "edit":true,
+  "delete":true,
+  "add":true,
+  "access":true,
+  "role_id" : "669a49babbbf89902297588a"
+},
+{
+  "_id" : "669a4b38bbbf899022975891",
+  "module_name": "User",
+  "view":true,
+  "edit":true,
+  "delete":true,
+  "add":true,
+  "access":true,
+  "role_id" : "669a49babbbf89902297588a"
+},
+{
+  "_id" : "669a4b61bbbf899022975892",
+  "module_name": "product",
+  "view":true,
+  "edit": false,
+  "delete": false,
+  "add": false,
+  "access": false,
+  "role_id" : "669a49f6bbbf89902297588b"
+},
+{
+  "_id" : "669a4bd1bbbf899022975893",
+  "module_name": "Order",
+  "view":true,
+  "edit": false,
+  "delete": false,
+  "add":true,
+  "access": false,
+  "role_id" : "669a49f6bbbf89902297588b"
+},
+{
+  "_id" : "669a4c0dbbbf899022975894",
+  "module_name": "User",
+  "view":true,
+  "edit":true,
+  "delete": false,
+  "add": false,
+  "access": false,
+  "role_id" : "669a49f6bbbf89902297588b"
+},
+{
+  "_id" : "669a4c66bbbf899022975896",
+  "module_name": "Order",
+  "view":true,
+  "edit":true,
+  "delete":true,
+  "add":true,
+  "access":true,
+  "role_id" : "669a49babbbf89902297588a"
+}]

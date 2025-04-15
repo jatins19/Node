@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Started</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d; /* Dark background color */
+            color: #ffffff; /* White text color */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+        .header {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            font-size: 24px;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        .glow {
+            text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347; /* Red glowing effect */
+            animation: glow-animation 1s ease-in-out infinite alternate;
+        }
+        @keyframes glow-animation {
+            0% { text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347; }
+            100% { text-shadow: 0 0 20px #ff6347, 0 0 30px #ff6347, 0 0 40px #ff6347; }
+        }
+        .button {
+            display: none; /* Hide button by default */
+            /* display: inline-block; */
+            margin-top: 40px;
+            padding: 12px 24px;
+            background-color: #ff6347;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #e74c3c; /* Darker shade of red on hover */
+        }
+        .button.show {
+            display: inline-block; /* Show button when JavaScript adds 'show' class */
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header glow">HEADLESS BACKEND PROJECT</h1>
+    <p class="subtitle">The API has started successfully on port 3000.</p>
+    <a id="exploreButton" href="api-documentation.html" class="button">Explore API's</a>
+
+    <script>
+          // Function to hide explore button if in production
+          function checkEnv() {
+              fetch('/env')
+              .then(response => response.json())
+              .then(data => { 
+                console.log(data.env,"env")
+                if (data.env != 'production') {
+                        document.getElementById('exploreButton').classList.add('show');
+                    }
+                });
+        }
+        checkEnv()
+        // Greeting messages array
+        const greetings = [
+            "Welcome, Trident.",
+            "Good to see you back, Trident.",
+            "Initializing backend systems, Trident."
+        ];
+
+        // Function to display greeting message
+        function displayGreeting() {
+            const randomIndex = Math.floor(Math.random() * greetings.length);
+            const greeting = greetings[randomIndex];
+            const subtitle = document.querySelector('.subtitle');
+            subtitle.textContent = greeting;
+        }
+
+        // Display initial greeting
+        displayGreeting();
+
+        // Update greeting message every 5 seconds
+        setInterval(displayGreeting, 5000);
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            /* Gradient background */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+            /* Red glowing effect */
+            animation: glow-animation 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-animation {
+            0% {
+                text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+            }
+
+            100% {
+                text-shadow: 0 0 20px #ff6347, 0 0 30px #ff6347, 0 0 40px #ff6347;
+            }
+        }
+
+        /* .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: #ff6347;
+            text-decoration: none;
+        } */
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Semi-transparent background */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .endpoint {
+            display: flex;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            width: 60%;
+            padding: 20px;
+        }
+
+        .content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #ff6347;
+            /* Red color for headings */
+        }
+
+        .content p,
+        .content pre {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .side-boxes {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .box {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+            /* Red glowing shadow */
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            /* Slight zoom on hover */
+        }
+
+        .box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00b894;
+            /* Emerald color for subheadings */
+        }
+
+        .box pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: #00b894;
+            /* Emerald color for button text */
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .copy-button:hover {
+            color: #ff6347;
+            /* Red color on hover */
+        }
+
+        .copy-button:disabled {
+            color: #aaa;
+            /* Grey color when disabled */
+            cursor: not-allowed;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 150px;
+            padding: 10px;
+            margin-right: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .sticky-header {
+            position: sticky;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.979);
+
+            top: 0;
+            /* background-color: #f4f4f4; */
+            padding: 10px 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ff6347;
+        }
+
+        .header-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sticky-header">
+        <a href="api-documentation.html" class="back-link">&#9756 Back to Categories</a>
+        <div class="header-container">
+            <h1 class="header glow">API Documentation</h1>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search API..." />
+        </div>
+    </div>
+    <div class="container">
+        <div class="endpoint">
+            <div class="content">
+                <h2>Plan List API</h2>
+                <p>This API allows to get plan details. Token Require in this. Type is use for getting different kind of
+                    subscription plans.</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Endpoint:</strong> <code> superadmin/list/:type</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/list/user'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response1', this)">Copy</button>
+                    <pre id="response1"><code>{
+     "status": true,
+     "message": "Plan List",
+     "data": {
+        // Plan Data
+     }
+}</code>
+                </pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Add Plan API</h2>
+                <p>This API allows Super Admin to add/create a Subscription Plan for the Users.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/add-subscription</code></p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>plan_name</li>
+                    <li>duration : it should be in number's of month</li>
+                    <li>price</li>
+                    <li>type : it is set according to the plan usage(user, product etc.)</li>
+                </ul>
+                </p>
+                <p> <strong>Note:</strong> By default type is <strong>user</strong> </p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/add-subscription' \
+                    --header 'x-access-token;' \
+                    --header 'Content-Type: application/json' \
+                    --data '{
+                    "plan_name":"Basic",
+                    "duration":2,
+                    "price":2500,
+                    "type":"user"
+                    }'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    "plan_name": "basic",  
+    "duration": 2 //months,
+    "price": "2500" //amount,
+    "type": "user"
+    // other keys to update
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Plan Creates Successfully",
+    "data": // plan_id
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Plan View API</h2>
+                <p>This API allows to get plan details of a specific Plan. Token Require in this.plan id pass in parmas
+                    of API</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Endpoint:</strong> <code> superadmin/view-subscription/:id</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>cURL</strong> :- curl --location
+                    'http://localhost:3000/superadmin/view-subscription/6697c72354c38ac9d0552978' \
+                    --header 'x-access-token: //Token'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response1', this)">Copy</button>
+                    <pre id="response1"><code>{
+     "status": true,
+     "message": "Plan Details",
+     "data": {
+        // Plan Data
+     }
+}</code>
+                </pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Edit Plan API</h2>
+                <p>This API allows Super Admin to Edit a Subscription Plan for the Users.Plan Id pass in params formate
+                    in API </p>
+                <p><strong>Endpoint:</strong> <code> superadmin/update-subscription/:id</code></p>
+                <p><strong>Method:</strong> PUT</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>plan_name</li>
+                    <li>duration : it should be in number's of month</li>
+                    <li>price</li>
+                    <li>type : it is set according to the plan usage(user, product etc.)</li>
+                </ul>
+                </p>
+                <p> <strong>Note:</strong> By default type is <strong>user</strong> </p>
+                <p><strong>cURL</strong> :- curl --location --request PUT
+                    'http://localhost:3000/superadmin/update-subscription/6697c72354c38ac9d0552978' \
+                    --header 'x-access-token: //Token' \
+                    --header 'Content-Type: application/json' \
+                    --data '{
+                    "plan_name":"Basic",
+                    "duration":2,
+                    "price":5000,
+                    "type":"user"
+                    }'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    "plan_name": "basic",  
+    "duration": 2 //months,
+    "price": "2500" //amount,
+    "type": "user"
+    // other keys to update
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Plan Updated successfully",
+    "data": // plan Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Delete Plan API</h2>
+                <p>This API allows Super Admin to Delete a Plan by passing Plan id in params.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/delete-subscription/:id</code></p>
+                <p><strong>Method:</strong> Delete</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location --request DELETE
+                    'http://localhost:3000/superadmin/delete-subscription/6697c72354c38ac9d0552978' \
+                    --header 'x-access-token://Token'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Delete successfully",  
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Admin List API</h2>
+                <p>This API Show the list of all admin.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/admin-list</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/admin-list'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Admin List",
+    "list": // Admin Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Create Admin API</h2>
+                <p>This API allows Super Admin to add/create a Admin.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/create-admin</code></p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>email</li>
+                    <li>password</li>
+                    <li>first_name</li>
+                    <li>last_name</li>
+                    <li>dob</li>
+                    <li>address</li>
+                    <li>phone_number</li>
+                    <li>country_code</li>
+                </ul>
+                </p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/create-admin' \
+                    --header 'Content-Type: application/json' \
+                    --data-raw '{
+                    "first_name":"Dheeraj",
+                    "last_name":"gehlot",
+                    "dob":"2220-10-08T00:00:00.000+00:00",
+                    "address":"vizag",
+                    "email":"d@gmail.com",
+                    "phone_number":"1651561",
+                    "country_code":"+1",
+                    "password":"12345678"
+                    }'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    "first_name":"user",
+    "last_name":"name",
+    "dob":"2220-10-08T00:00:00.000+00:00",
+    "address":"USA",
+    "email":"example@gmail.com",
+    "phone_number":"1651561",
+    "country_code":"+1",
+    "password":"12345678"
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Admin Added Successfull", 
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Admin View API</h2>
+                <p>This API allows to get Admin details of a specific Admin. Token Require in this.Admin id pass in
+                    parmas
+                    of API</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Endpoint:</strong> <code> superadmin/view-admin/:id</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>cURL</strong> :- curl --location
+                    'http://localhost:3000/superadmin/view-admin/66a0f6460843519a16f4f1bd' \
+                    --header 'x-access-token://Token'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response1', this)">Copy</button>
+                    <pre id="response1"><code>{
+     "status": true,
+     "message": "Admin Details",
+     "data": {
+        // Admin Data
+     }
+}</code>
+                </pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Update Admin API</h2>
+                <p>This API allows Super Admin to update a Admin by passing admin id in params.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/update-admin/:id</code></p>
+                <p><strong>Method:</strong> PUT</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>email</li>
+                    <li>password</li>
+                    <li>first_name</li>
+                    <li>last_name</li>
+                    <li>dob</li>
+                    <li>address</li>
+                    <li>phone_number</li>
+                    <li>country_code</li>
+                </ul>
+                </p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/create-admin' \
+                    --header 'Content-Type: application/json' \
+                    --data-raw '{
+                    "first_name":"Dheeraj",
+                    "last_name":"gehlot",
+                    "dob":"2220-10-08T00:00:00.000+00:00",
+                    "address":"vizag",
+                    "email":"d@gmail.com",
+                    "phone_number":"1651561",
+                    "country_code":"+1",
+                    "password":"12345678"
+                    }'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    "first_name":"user",
+    "last_name":"name",
+    "dob":"2220-10-08T00:00:00.000+00:00",
+    "address":"USA",
+    "email":"example@gmail.com",
+    "phone_number":"1651561",
+    "country_code":"+1",
+    "password":"12345678"
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Admin Update Successfull", 
+    "data": // Admin Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Delete Admin API</h2>
+                <p>This API allows Super Admin to Delete a Admin by passing admin id in params.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/delete-admin/:id</code></p>
+                <p><strong>Method:</strong> Delete</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location --request DELETE
+                    'http://localhost:3000/superadmin/delete-admin/669e20844babd2fc86657ce6'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Delete successfully",  
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>User List API</h2>
+                <p>This API Show the list of all user.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/user-list</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/user-list'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "User List",
+    "list": // Admin Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Delete User API</h2>
+                <p>This API allows Super Admin to Delete a User by passing admin id in params.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/delete-user/:id</code></p>
+                <p><strong>Method:</strong> Delete</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location --request DELETE
+                    'http://localhost:3000/superadmin/delete-user/669e20844babd2fc86657ce6'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Delete successfully",  
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Create Category API</h2>
+                <p>This API allows Super Admin to add/create a Category.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/add-category</code></p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>name</li>
+                    <li>sub_category : Array </li>
+                    <li>category_image</li>
+                </ul>
+                </p>
+                <p><strong>cURL</strong> :- curl --location 'http://localhost:3000/superadmin/add-category' \
+                    --form
+                    'category_image=@"/home/nodejs/Downloads/top-view-desk-concept-with-coffee_23-2148604932.jpg"' \
+                    --form 'name="Fashion"' \
+                    --form 'sub_category[]="men"'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    "name":"Fashion",
+    "sub_category":[
+        "men"
+    ]
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Category Created Successfully", 
+    "data":// Category Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Update Category API</h2>
+                <p>This API allows Super Admin to update a Category by passing Category id in params.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/update-category/:id</code></p>
+                <p><strong>Method:</strong> PUT</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Accepted Keys:</strong>
+                <ul>
+                    <li>name</li>
+                    <li>sub_category : Array </li>
+                    <li>category_image</li>
+                </ul>
+                </p>
+                <p><strong>cURL</strong> :- curl --location --request PUT
+                    'http://localhost:3000/superadmin/update-category/66a8df5ff3cb06be54706894' \
+                    --form 'category_image=@"/home/nodejs/Downloads/imageFile-32-1719925354886.png"'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Payload</h3>
+                    <button class="copy-button" onclick="copyToClipboard('payload1', this)">Copy</button>
+                    <pre id="payload1"><code>{
+    "name":"Fashion",
+    "sub_category":[
+        "men"
+    ]
+}</code></pre>
+                </div>
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Category Updated", 
+    "data": // Category Data
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Category View API</h2>
+                <p>This API allows to get Admin details of a specific Category. Token Require in this.Admin id pass in
+                    parmas
+                    of API</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>Endpoint:</strong> <code> superadmin/view-category/:id</code></p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>cURL</strong> :- curl --location
+                    'http://localhost:3000/superadmin/view-category/66a8e260f3cb06be5470689c' \
+                    --header 'x-access-token: //Token'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response1', this)">Copy</button>
+                    <pre id="response1"><code>{
+     "status": true,
+     "message": "Category Details",
+     "data": {
+        // Category Data
+     }
+}</code>
+                </pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="content">
+                <h2>Delete Category API</h2>
+                <p>This API allows Super Admin to Delete a Category by passing admin id in params.</p>
+                <p><strong>Endpoint:</strong> <code> superadmin/delete-admin/:id</code></p>
+                <p><strong>Method:</strong> Delete</p>
+                <p><strong>TOKEN KEY:</strong> <code>x-access-token</code></p>
+                <p><strong>cURL</strong> :- curl --location --request DELETE 'http://localhost:3000/superadmin/delete-category/66a8e260f3cb06be5470689c' \
+                    --header 'x-access-token: //Token'</p>
+            </div>
+            <div class="side-boxes">
+                <div class="box">
+                    <h3>API Response</h3>
+                    <button class="copy-button" onclick="copyToClipboard('response2', this)">Copy</button>
+                    <pre id="response2"><code>{
+    "status": true,
+    "message": "Delete successfully",  
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script>
+        function copyToClipboard(elementId, buttonElement) {
+            var copyText = document.getElementById(elementId).innerText;
+            var tempInput = document.createElement("textarea");
+            tempInput.style.position = "absolute";
+            tempInput.style.left = "-9999px";
+            tempInput.value = copyText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            // Change button text to indicate copy action
+            buttonElement.innerText = "Copied";
+            buttonElement.disabled = true;
+
+            // Re-enable the button and change text back after 3 seconds
+            setTimeout(() => {
+                buttonElement.innerText = "Copy";
+                buttonElement.disabled = false;
+            }, 3000);
+        }
+        document.getElementById('searchInput').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default form submission behavior
+                const searchQuery = this.value.toLowerCase();
+                const endpoints = document.querySelectorAll('.endpoint .content h2');
+                let found = false;
+
+                endpoints.forEach(endpoint => {
+                    const text = endpoint.textContent.toLowerCase();
+                    if (text.includes(searchQuery) && !found) {
+                        endpoint.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        found = true; // Stop after the first match is found
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

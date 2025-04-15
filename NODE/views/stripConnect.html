@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date and Time to UTC Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    input,
+    button {
+      margin-bottom: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <label for="datetime">Select Date and Time:</label>
+    <input type="datetime-local" id="datetime">
+
+    <button onclick="convertToUTC()">Convert to UTC</button>
+
+    <div id="result1"></div>
+    <div id="result2"></div>
+    <div id="result3"></div>
+    <div id="result4"></div>
+  </div>
+
+  <script>
+    function convertToUTC() {
+      const datetimeInput = document.getElementById('datetime').value;
+      if (datetimeInput) {
+        const localDateTime = new Date(datetimeInput);
+        const utcString = localDateTime.toISOString();
+        const endDate = new Date(utcString);
+        const cronExpression = `${endDate.getUTCMinutes()} ${endDate.getUTCHours()} ${endDate.getDate()} ${endDate.getMonth() + 1} *`;
+
+        document.getElementById('result1').innerText = `UTC Time 1: ${localDateTime}`;
+        document.getElementById('result2').innerText = `UTC Time 2: ${utcString}`;
+        document.getElementById('result3').innerText = `UTC Time 3: ${endDate}`;
+        document.getElementById('result4').innerText = `UTC Time 4: ${cronExpression}`;
+      } else {
+        document.getElementById('result').innerText = 'Please select a valid date and time.';
+      }
+    }
+  </script>
+
+</body>
+
+</html>
